@@ -1,0 +1,18 @@
+import pandas as pd
+tabela = pd.read_excel(r'C:\Users\joao.daltro\Desktop\Ambiente de teste Python\Fluxo_BI_Marco.xlsx')
+display(tabela)
+tabela.dtypes
+resultado_por_unidade = tabela[["N2_FINAL", "Valor Final 2"]].groupby(["N2_FINAL"]).sum("Valor Final 2")
+display(resultado_por_unidade)
+tabela["Valor_por_mil"] = tabela["Valor Final 2"] / 1000
+display(tabela)
+resultado_por_unidade = tabela[["EMPRESA", "N2_FINAL", "Valor_por_mil"]].groupby(["EMPRESA", "N2_FINAL"]).sum("Valor_por_mil")
+display(resultado_por_unidade)
+info_unidades = pd.read_excel(r"Z:\Financeiro\Fluxo de Caixa Rede D'Or\Fluxo de Caixa Modelo PBI\Informações consolidadas das unidadesv2.xlsx")
+display(info_unidades)
+info_unidades = info_unidades.rename(columns={
+    "Código" : "E5_FILIAL"
+})
+display(info_unidades)
+tabela = pd.merge(tabela, info_unidades, how="left", on="E5_FILIAL")
+display(tabela)
