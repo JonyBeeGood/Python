@@ -1,0 +1,3 @@
+import cx_Oracle
+dns_tns = cx_Oracle.makedsn('rdrj2ex-scan1.rededor.corp', '1521', 'serv_dbconerp')
+conn = cx_Oracle.connect(user = 'powerbi', password = 'powerbi2018', dsn = dns_tns)
